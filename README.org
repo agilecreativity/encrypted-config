@@ -24,6 +24,10 @@ Easy encrypted your configuration in Clojure using the power of
     lein bin
 #+END_SRC
 
+** Links
+
+- [[https://github.com/weavejester/crypto-random/blob/master/src/crypto/random.clj][crypto-random]]
+
 ** License
 
 Copyright © 2017 Burin Choomnuan
