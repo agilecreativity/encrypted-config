@@ -1,0 +1,32 @@
+* encrypted-config
+
+Easy encrypted your configuration in Clojure using the power of
+
+** Usage
+*** What you will need
+
+-  [[https://www.java.com/en/download/][Java SDK]]
+-  [[http://repo1.maven.org/maven2/org/clojure/clojure/1.8.0/clojure-1.8.0.zip][Clojure]]
+-  [[http://leiningen.org/][Leiningen]] - Build tools for Clojure
+
+#+BEGIN_SRC sh
+    ## if you are using ssh
+    git clone git@github.com:agilecreativity/encrypted-config.git
+
+    ## If you are using https
+    git clone https://github.com/agilecreativity/encrypted-config.git
+#+END_SRC
+
+-  Then genenerate the self-executable
+
+#+BEGIN_SRC sh
+    ## Run Leiningen to generate the script to ~/bin/encrypted-config
+    lein bin
+#+END_SRC
+
+** License
+
+Copyright © 2017 Burin Choomnuan
+
+Distributed under the Eclipse Public License either version 1.0 or (at
+your option) any later version.
