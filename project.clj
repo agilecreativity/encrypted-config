@@ -1,4 +1,4 @@
-(defproject encrypted-config "0.1.0"
+(defproject encrypted-config "0.1.1"
   :description "Encryption/decryption library for store sensitive configuration."
   :url "https://github.com/agilecreativity/encrypted-config"
   :license {:name "Eclipse Public License"
@@ -10,5 +10,5 @@
                  [crypto-random "1.2.0"]
                  [buddy "1.3.0"]
                  [org.bouncycastle/bcprov-jdk15on "1.56"]]
-  :plugins [[lein-cljfmt "0.5.3"]
+  :plugins [[lein-cljfmt "0.5.6"]
             [lein-auto "0.1.3"]])

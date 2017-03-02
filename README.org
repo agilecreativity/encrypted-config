@@ -1,5 +1,8 @@
 * encrypted-config
 
+[[https://clojars.org/encrypted-config][https://img.shields.io/clojars/v/encrypted-config.svg]]
+[[https://jarkeeper.com/agilecreativity/encrypted-config][https://jarkeeper.com/agilecreativity/encrypted-config/status.svg]]
+
 Easy encrypted your configuration in Clojure using the power of [[https://github.com/funcool/buddy][buddy]].
 
 ** Usage
