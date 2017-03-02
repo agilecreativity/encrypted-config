@@ -1,32 +1,46 @@
 * encrypted-config
 
-Easy encrypted your configuration in Clojure using the power of
+Easy encrypted your configuration in Clojure using the power of [[https://github.com/funcool/buddy][buddy]].
 
 ** Usage
-*** What you will need
+
+*** What you will need to use this library
 
 -  [[https://www.java.com/en/download/][Java SDK]]
 -  [[http://repo1.maven.org/maven2/org/clojure/clojure/1.8.0/clojure-1.8.0.zip][Clojure]]
 -  [[http://leiningen.org/][Leiningen]] - Build tools for Clojure
 
-#+BEGIN_SRC sh
-    ## if you are using ssh
-    git clone git@github.com:agilecreativity/encrypted-config.git
+** What you can do with this?
 
-    ## If you are using https
-    git clone https://github.com/agilecreativity/encrypted-config.git
+*** To encrypt credentials like =password=
+
+#+BEGIN_SRC clojure :results nil
+  ;; Note: running this multiple time will give different result as =random-hex= is re-generated each time.
+  (:require [encrypted-config :refer [str->encrypted] :as ecc])
+
+  (ecc/str->encrypted "MyP@ssword!"
+                      "MySec$tKey@")
+  ;; =>
+  ;; FYI: input-text      : MyP@ssword!
+  ;; FYI: secret-key*     : MySec$tKey@
+  ;; FYI: random-hex*     : 74da4feae9c06f49f4840a6d610bd3ee
+  ;; FYI: encrypted-text* : 19130b61026ff358b4a3db02334d87c3afaf3da9282e2d6bb90a158df7d0d07f
 #+END_SRC
 
--  Then genenerate the self-executable
+*** To decrypt the credentials using the previous encrypted keys as parameters
 
-#+BEGIN_SRC sh
-    ## Run Leiningen to generate the script to ~/bin/encrypted-config
-    lein bin
+#+BEGIN_SRC clojure :results nil
+  (:require [encrypted-config :refer [str->decrypted str->encrypted] :as ecc])
+  (ecc/str->decrypted "19130b61026ff358b4a3db02334d87c3afaf3da9282e2d6bb90a158df7d0d07f"
+                      "MySec$tKey@"
+                      "74da4feae9c06f49f4840a6d610bd3ee")
+  ;;=> "MyP@ssword!"
 #+END_SRC
 
 ** Links
 
 - [[https://github.com/weavejester/crypto-random/blob/master/src/crypto/random.clj][crypto-random]]
+- [[https://github.com/funcool/buddy][buddy - security for Clojure]]
 
 ** License
 

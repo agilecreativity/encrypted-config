@@ -1,4 +1,5 @@
 #!/bin/bash
+lein clean
 lein pom
 mvn dependency:sources
 mvn eclipse:eclipse
