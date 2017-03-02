@@ -42,21 +42,21 @@
 ;; Public APIs
 
 (defn str->encrypted
-  "Encrypted the given `input-text' using a given `secret-key'.
-You must write down the random-hex string generated with this routine.
-Return the list of (random-hex encrypted-text)"
+  "Encrypted a given `input-text' using a given `secret-key'.
+Return the map of :encrypted-key :encrypted-text that can be used"
   [input-text
    secret-key]
-  (let [random-hex (ctr/hex 16) ;; Need to store this one!
-        salt-key (codecs/hex->bytes random-hex)
+  (let [encrypted-key (ctr/hex 16)
+        salt-key (codecs/hex->bytes encrypted-key)
         encrypted-text (encrypted-to-hex input-text secret-key salt-key)]
-    ;; Return the encrypted string
-    (list random-hex encrypted-text)))
+    ;; Return as a map instead of list
+    {:encrypted-key  encrypted-key
+     :encrypted-text encrypted-text}))
 
 (defn str->decrypted
   "Decrypted previously encrypted text using secret-key and random-hex."
   [encrypted-text
-   secret-key
-   random-hex]
-  (let [salt-key (codecs/hex->bytes random-hex)]
+   encrypted-key
+   secret-key]
+  (let [salt-key (codecs/hex->bytes encrypted-key)]
     (decrypted-wrapper encrypted-text secret-key salt-key)))

@@ -5,7 +5,7 @@
 
 Easy encrypted your configuration in Clojure using the power of [[https://github.com/funcool/buddy][buddy]].
 
-** Usage
+** Basic Usage
 
 *** What you will need to use this library
 
@@ -17,25 +17,35 @@ Easy encrypted your configuration in Clojure using the power of [[https://github
 
 *** To encrypt credentials like =password=
 
-#+BEGIN_SRC clojure :results nil
-  ;; Note: running this multiple time will give different result as =random-hex= is re-generated each time.
-  (:require [encrypted-config :refer [str->encrypted] :as ecc])
-  (ecc/str->encrypted "MyP@ssword!"
-                      "MySec$tKey@")
-
-  ;;=> e.g. (list random-hex encrypted-string)
-  ;;=> (list "74da4feae9c06f49f4840a6d610bd3ee" "19130b61026ff358b4a3db02334d87c3afaf3da9282e2d6bb90a158df7d0d07f")
-#+END_SRC
-
-*** To decrypt the credentials using the previous encrypted keys as parameters
+See the example tests for some idea of how this work.
 
 #+BEGIN_SRC clojure :results nil
-  (:require [encrypted-config :refer [str->decrypted] :as ecc])
-  (ecc/str->decrypted "19130b61026ff358b4a3db02334d87c3afaf3da9282e2d6bb90a158df7d0d07f"
-                      "MySec$tKey@"
-                      "74da4feae9c06f49f4840a6d610bd3ee")
-  ;;=> "MyP@ssword!"
+  (let [input-text "MyP@ssword!"
+            secret-key "MySec$tKey@"
+            {:keys [encrypted-key
+                    encrypted-text]}
+             (ecc/str->encrypted input-text secret-key)
+            ;; Now let's decrypt the text we have just encrypted
+            decrypted-text (ecc/str->decrypted encrypted-text
+                                               encrypted-key
+                                               secret-key)]
+        (do
+          (println (str "FYI: input-text     : " input-text))
+          (println (str "FYI: secret-key     : " secret-key))
+          (println (str "FYI: encrypted-key  : " encrypted-key))
+          (println (str "FYI: encrypted-text : " encrypted-text))))
 #+END_SRC
+
+Your result will be like:
+
+#+BEGIN_EXAMPLE
+FYI: input-text     : MyP@ssword!
+FYI: secret-key*    : MySec$tKey@
+FYI: encrypted-key* : b0ed81af1e42b826ccdcabc3fa059d0c
+FYI: encrypted-text : 3e8a19218245b48c5f546c902c75deb98077d7e2d7030afde9f0b10a8e3a6bb0
+#+END_EXAMPLE
+
+So you can safely store the =encrypted-text= in the property file and decrypted it back safely.
 
 ** Links
 

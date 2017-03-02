@@ -3,16 +3,15 @@
             [encrypted-config.core :refer [str->encrypted
                                            str->decrypted] :as ecc]))
 
-;; See: https://github.com/clojure-emacs/cider/blob/master/doc/running_tests.md
-;; To run the test C-c C-t n
-
 (deftest encryption->decryption
-  (testing "Simple decryption"
+  (testing "encrypte a given text and immediately decrypted it back."
     (let [input-text "MyP@ssword!"
           secret-key "MySec$tKey@"
-          [random-hex encrypted-text] (ecc/str->encrypted input-text secret-key)
+          {:keys [encrypted-key
+                  encrypted-text]}
+           (ecc/str->encrypted input-text secret-key)
           ;; Now let's decrypt the text we have just encrypted
           decrypted-text (ecc/str->decrypted encrypted-text
-                                             secret-key
-                                             random-hex)]
+                                             encrypted-key
+                                             secret-key)]
       (is (= input-text decrypted-text)))))
