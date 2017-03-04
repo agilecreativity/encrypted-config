@@ -36,27 +36,42 @@ compile "encrypted-config:encrypted-config:0.1.1"
   </dependency>
 #+END_SRC
 
-** What you can do with this?
+** Basic Usage:
 
-*** To encrypt credentials like =password=
+**** Encrypt a given text
 
-See the example tests for some idea of how this work.
+#+BEGIN_SRC clojure :results nil
+  ;; To encrypted a given input-text using the secret-key
+  (str->encrypted input-text secret-key)
+
+  ;; You will get back the map of
+  ;; {:encrypted-key  <key-generated-by-the-system>
+  ;;  :encrypted-text <encrypted-text-that-you-can-use>}
+#+END_SRC
+
+**** Decrypt value that previously encrypted
+
+#+BEGIN_SRC clojure :results nil
+  (str->decrypted encrypted-text encrypted-key secret-key)
+#+END_SRC
+
+** Example Usages
 
 #+BEGIN_SRC clojure :results nil
   (let [input-text "MyP@ssword!"
-            secret-key "MySec$tKey@"
-            {:keys [encrypted-key
-                    encrypted-text]}
-             (ecc/str->encrypted input-text secret-key)
-            ;; Now let's decrypt the text we have just encrypted
-            decrypted-text (ecc/str->decrypted encrypted-text
-                                               encrypted-key
-                                               secret-key)]
-        (do
-          (println (str "FYI: input-text     : " input-text))
-          (println (str "FYI: secret-key     : " secret-key))
-          (println (str "FYI: encrypted-key  : " encrypted-key))
-          (println (str "FYI: encrypted-text : " encrypted-text))))
+        secret-key "MySec$tKey@"
+        {:keys [encrypted-key
+                encrypted-text]}
+        (str->encrypted input-text secret-key)
+        ;; Now let's decrypt the text we have just encrypted
+        decrypted-text (str->decrypted encrypted-text
+                                       encrypted-key
+                                       secret-key)]
+    (do
+      (println (str "FYI: input-text     : " input-text))
+      (println (str "FYI: secret-key     : " secret-key))
+      (println (str "FYI: encrypted-key  : " encrypted-key))
+      (println (str "FYI: encrypted-text : " encrypted-text))))
 #+END_SRC
 
 Your result will be like:
