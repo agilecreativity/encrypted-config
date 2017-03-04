@@ -9,9 +9,32 @@ Easy encrypted your configuration in Clojure using the power of [[https://github
 
 *** What you will need to use this library
 
--  [[https://www.java.com/en/download/][Java SDK]]
--  [[http://repo1.maven.org/maven2/org/clojure/clojure/1.8.0/clojure-1.8.0.zip][Clojure]]
--  [[http://leiningen.org/][Leiningen]] - Build tools for Clojure
+- [[https://www.java.com/en/download/][Java SDK]]
+- [[http://repo1.maven.org/maven2/org/clojure/clojure/1.8.0/clojure-1.8.0.zip][Clojure]]
+- [[http://leiningen.org/][Leiningen]] - Build tools for Clojure
+-
+
+*** Use in your project
+
+**** Leiningen/Boot
+#+BEGIN_SRC clojure :results nil
+  [encrypted-config "0.1.1"]
+#+END_SRC
+
+**** Gradle
+
+#+BEGIN_EXAMPLE
+compile "encrypted-config:encrypted-config:0.1.1"
+#+END_EXAMPLE
+
+**** Maven
+#+BEGIN_SRC xml :results nil
+  <dependency>
+    <groupId>encrypted-config</groupId>
+    <artifactId>encrypted-config</artifactId>
+    <version>0.1.1</version>
+  </dependency>
+#+END_SRC
 
 ** What you can do with this?
 
